@@ -13,6 +13,7 @@ export default function TableClient({ queimadas }: { queimadas: FocoQueimada[] }
             <th className="p-4">Bioma</th>
         </tr>
     </thead>
+    <tbody>
         {queimadas.map((foco, i) => (
           <tr key={i} className="p-4 border-b-2 border-black">
               <td className="p-4">{foco.municipio}</td>
@@ -20,6 +21,7 @@ export default function TableClient({ queimadas }: { queimadas: FocoQueimada[] }
               <td className="p-4">{foco.bioma}</td>
           </tr>
         ))}
+    </tbody>
     </table>
     </>
   );

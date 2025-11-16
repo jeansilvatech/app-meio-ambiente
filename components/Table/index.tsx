@@ -84,6 +84,7 @@ useEffect(() => {
       }
       </div>
       <Separator/>
+      <h2 className="w-full text-center lg:text-4xl text-2xl mb-10">Numéro por bioma <span className="bg-[#71E4C0] text-black px-4 py-2 rounded-2xl">Hoje</span> </h2>
        <div className="w-full flex justify-center items-center flex-wrap lg:px-10 px-4">
         <Image className="m-1" data-aos="fade-up" src={iconBioma} alt="Icone Biomas" width={300} height={300} />
         {
