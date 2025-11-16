@@ -71,7 +71,7 @@ useEffect(() => {
     <div className="w-full h-full py-4 text-[#71E4C0] flex justify-center items-center flex-col my-10">
       <h2 className="w-full text-center lg:text-4xl text-2xl mb-10">Numéro por estado <span className="bg-[#71E4C0] text-black px-4 py-2 rounded-2xl">Hoje</span> </h2>
       <div className="w-full flex justify-center items-center flex-wrap lg:px-10 px-4">
-        <Image className="m-1" data-aos="fade-up" src={iconBrasil} alt="Mapa do Brasil" width={300} height={300} />
+        <Image unoptimized className="m-1" data-aos="fade-up" src={iconBrasil} alt="Mapa do Brasil" width={300} height={300} />
         {
         estadosBR.map((estado) => {
           const count = queimadas.filter(q => q.estado === estado.toUpperCase()).length;
@@ -86,7 +86,7 @@ useEffect(() => {
       <Separator/>
       <h2 className="w-full text-center lg:text-4xl text-2xl mb-10">Numéro por bioma <span className="bg-[#71E4C0] text-black px-4 py-2 rounded-2xl">Hoje</span> </h2>
        <div className="w-full flex justify-center items-center flex-wrap lg:px-10 px-4">
-        <Image className="m-1" data-aos="fade-up" src={iconBioma} alt="Icone Biomas" width={300} height={300} />
+        <Image unoptimized className="m-1" data-aos="fade-up" src={iconBioma} alt="Icone Biomas" width={300} height={300} />
         {
         biomasBR.map((bioma) => {
           const count = queimadas.filter(q => q.bioma === bioma).length;
