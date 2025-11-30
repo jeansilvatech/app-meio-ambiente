@@ -1,4 +1,5 @@
 "use client"
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import TableComponent from "@/components/Table";
 import React from "react";
@@ -8,6 +9,7 @@ export default function Home() {
     <div>
       <Header/>
       <TableComponent/>
+      <Footer/>
     </div>
   );
 }

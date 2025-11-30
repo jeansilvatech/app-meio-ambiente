@@ -91,9 +91,8 @@ useEffect(() => {
         })
       }
       </div>
-      <Separator/>
-      {queimadas.length === 0 && <p>Nenhum dado encontrado.</p>}
-      <TableClient queimadas={queimadas} />
+      {/* {queimadas.length === 0 && <p>Nenhum dado encontrado.</p>}
+      <TableClient queimadas={queimadas} /> */}
     </div>
   );
 }
