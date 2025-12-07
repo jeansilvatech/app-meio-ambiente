@@ -1,11 +1,10 @@
 "use client";
-
 import { useState, useMemo, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { FocoQueimada } from "@/app/api/queimadas/route";
 import { ChevronDown, ChevronUp, ChevronsUpDown } from 'lucide-react';
 import Box from '@mui/material/Box';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import React from 'react';
@@ -13,16 +12,7 @@ import { Map } from 'leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import iconFireUrl from '../../public/fire-icon.png';
-import dynamic from 'next/dynamic';
-
-// 2. Crie um componente para o mapa que é carregado apenas no cliente
-const DynamicMapContainer = dynamic(() =>
-    import('react-leaflet').then(mod => mod.MapContainer),
-    { 
-        ssr: false, // 💡 ISSO DESATIVA A RENDERIZAÇÃO NO SERVIDOR
-        loading: () => <p>Carregando mapa...</p>, // Opcional: Mostrar um loader
-    }
-);
+import { useMap } from 'react-leaflet';
 type SortDirection = 'asc' | 'desc';
 const style = {
   position: 'absolute',
@@ -76,6 +66,29 @@ const MapResizer: React.FC<MapResizerProps> = ({ open }) => {
 
     return null; 
 };
+const DynamicMapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), {
+    ssr: false, 
+    loading: () => <p>Carregando mapa...</p>,
+});
+
+// Define o TileLayer para carregar apenas no cliente
+const DynamicTileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), {
+    ssr: false,
+});
+
+// Define o Marker para carregar apenas no cliente
+const DynamicMarker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), {
+    ssr: false,
+});
+
+// Define o Popup para carregar apenas no cliente
+const DynamicPopup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
+    ssr: false,
+});
+
+const DynamicMapResizer = dynamic(() => Promise.resolve(MapResizer), {
+    ssr: false, // ESSENCIAL
+});
 export default function TableClient({ queimadas }: { queimadas: FocoQueimada[] }) {
     const [sortKey, setSortKey] = useState<keyof FocoQueimada | null>('municipio');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
@@ -207,23 +220,23 @@ export default function TableClient({ queimadas }: { queimadas: FocoQueimada[] }
                             zoom={6} // Aumentei o zoom para 6, pois 5 é muito distante
                             style={{ height: '90%', width: '100%' }}
                                 >
-                            <MapResizer open={open} />
-                            <TileLayer
+                            <DynamicMapResizer open={open} />
+                            <DynamicTileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             />
-                            <Marker 
+                            <DynamicMarker 
                                 icon={fireIcon}
                                 position={[selectedFoco.lat, selectedFoco.lon]} // Verifique se as props 'lat' e 'lon' estão corretas
                             >
-                                <Popup className='popup'>
+                                <DynamicPopup className='popup'>
                                     <div className='flex justify-center items-center text-center flex-col capitalize'>
                                         {selectedFoco.municipio} - {selectedFoco.estado}
                                         <div className='popup-separator'></div>
                                         {selectedFoco.bioma}
                                     </div>
-                                </Popup>
-                            </Marker>
+                                </DynamicPopup>
+                            </DynamicMarker>
                             </DynamicMapContainer>
                             )
                     }
