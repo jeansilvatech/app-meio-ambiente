@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #60c29f;
 }
 
 @theme inline {
@@ -30,4 +31,36 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+.popup .leaflet-popup-content-wrapper,
+.popup .leaflet-popup-tip {
+  background-color: #8B0000;
+  color: #ffffff;
+}
+.popup .leaflet-popup-close-button{
+  color: #ffffff;
+}
+.popup .popup-separator{
+  width: 80%;
+  height: 1px;
+  border-radius: 100%;
+  background-color: #ffffff;
+  margin: 8px 0;
+}
+.table-line span{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary);
+  opacity: 0;
+  transition: opacity 0.1s;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.table-line:hover span {
+  opacity: 1;
+}

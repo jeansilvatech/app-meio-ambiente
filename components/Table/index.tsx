@@ -66,7 +66,7 @@ export default function TableComponent() {
 useEffect(() => {
     AOS.init({ duration: 800, once: false, mirror:true });
   }, []);
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <div className="p-4 bg-[#71E4C0] flex justify-center items-center">Carregando...</div>;
 
   return (
     <div className="w-full h-full py-4 flex justify-center items-center flex-col my-10">
@@ -91,8 +91,11 @@ useEffect(() => {
         })
       }
       </div>
-      {/* {queimadas.length === 0 && <p>Nenhum dado encontrado.</p>}
-      <TableClient queimadas={queimadas} /> */}
+      <Separator/>
+      {queimadas.length === 0 && <p>Nenhum dado encontrado.</p>}
+      
+      <h2 className="w-full text-center lg:text-4xl text-2xl mb-10">Registros por Municipio <span className="bg-[#71E4C0] text-black px-4 py-1 rounded-xl shadow-2xl border border-black/30">Hoje</span> </h2>
+      <TableClient queimadas={queimadas} />
     </div>
   );
 }

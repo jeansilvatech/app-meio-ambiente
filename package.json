@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@changey/react-leaflet-markercluster": "^4.0.0-rc1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.6",
     "aos": "^3.0.0-beta.6",
     "csv-parser": "^3.2.0",
     "leaflet": "^1.9.4",

@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import csv from "csv-parser";
 import { Readable } from "stream";
 export type FocoQueimada = {
-  lat: string;
-  lon: string;
+  lat: number;
+  lon: number;
   pais: string;
   estado: string;
   municipio: string;
