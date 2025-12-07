@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { FocoQueimada } from "@/app/api/queimadas/route";
@@ -8,11 +8,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import React from 'react';
-import { Map } from 'leaflet';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import iconFireUrl from '../../public/fire-icon.png';
-import { useMap } from 'react-leaflet';
+
+interface MapContentProps {
+    selectedFoco: FocoQueimada; 
+    open: boolean;
+}
+const DynamicMapContent = dynamic<MapContentProps>(() => import('../Map/MapContent'), {
+    ssr: false, 
+    loading: () => <p>Carregando mapa...</p>,
+});
 type SortDirection = 'asc' | 'desc';
 const style = {
   position: 'absolute',
@@ -26,18 +32,6 @@ const style = {
   p: 4,
 };
 
-
-
-const fireIcon = L.icon({
-    iconUrl: iconFireUrl.src,
-    // Tamanho do ícone (ajuste conforme o tamanho real da sua imagem)
-    iconSize: [32, 32], 
-    // Ponto 'âncora' do ícone (o ponto exato do ícone que estará na coordenada)
-    iconAnchor: [16, 32], 
-    // Ponto onde o popup se abre em relação ao ícone
-    popupAnchor: [0, -32] 
-    // Se precisar de sombra, adicione: shadowUrl: 'path/to/shadow.png'
-});
 // Função auxiliar para renderizar o indicador de ordenação
 const getSortIcon = (key: keyof FocoQueimada, currentKey: keyof FocoQueimada | null, direction: SortDirection) => {
     if (key !== currentKey) {
@@ -45,50 +39,7 @@ const getSortIcon = (key: keyof FocoQueimada, currentKey: keyof FocoQueimada | n
     }
     return direction === 'asc' ? <ChevronUp/> : <ChevronDown/>; // Ascendente ou descendente
 };
-interface MapResizerProps {
-    open: boolean;
-}
 
-const MapResizer: React.FC<MapResizerProps> = ({ open }) => {
-    // useMap só pode ser chamado DENTRO de MapContainer
-    const map: Map = useMap(); 
-
-    useEffect(() => {
-        if (open) {
-            // Pequeno atraso para garantir que o Modal já está visível
-            const timer = setTimeout(() => {
-                map.invalidateSize();
-            }, 50); 
-
-            return () => clearTimeout(timer);
-        }
-    }, [open, map]);
-
-    return null; 
-};
-const DynamicMapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), {
-    ssr: false, 
-    loading: () => <p>Carregando mapa...</p>,
-});
-
-// Define o TileLayer para carregar apenas no cliente
-const DynamicTileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), {
-    ssr: false,
-});
-
-// Define o Marker para carregar apenas no cliente
-const DynamicMarker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), {
-    ssr: false,
-});
-
-// Define o Popup para carregar apenas no cliente
-const DynamicPopup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
-    ssr: false,
-});
-
-const DynamicMapResizer = dynamic(() => Promise.resolve(MapResizer), {
-    ssr: false, // ESSENCIAL
-});
 export default function TableClient({ queimadas }: { queimadas: FocoQueimada[] }) {
     const [sortKey, setSortKey] = useState<keyof FocoQueimada | null>('municipio');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
@@ -147,7 +98,7 @@ export default function TableClient({ queimadas }: { queimadas: FocoQueimada[] }
         return sortedArray;
     }, [queimadas, sortKey, sortDirection, searchTerm]);
 
-    return (
+  return (
         <>
         <div className="mb-4 w-full flex justify-center items-center">
                 <input
@@ -215,29 +166,7 @@ export default function TableClient({ queimadas }: { queimadas: FocoQueimada[] }
                 <div className='w-full h-full'>
                     {
                         selectedFoco &&(
-                            <DynamicMapContainer 
-                            center={[selectedFoco.lat, selectedFoco.lon]} 
-                            zoom={6} // Aumentei o zoom para 6, pois 5 é muito distante
-                            style={{ height: '90%', width: '100%' }}
-                                >
-                            <DynamicMapResizer open={open} />
-                            <DynamicTileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            />
-                            <DynamicMarker 
-                                icon={fireIcon}
-                                position={[selectedFoco.lat, selectedFoco.lon]} // Verifique se as props 'lat' e 'lon' estão corretas
-                            >
-                                <DynamicPopup className='popup'>
-                                    <div className='flex justify-center items-center text-center flex-col capitalize'>
-                                        {selectedFoco.municipio} - {selectedFoco.estado}
-                                        <div className='popup-separator'></div>
-                                        {selectedFoco.bioma}
-                                    </div>
-                                </DynamicPopup>
-                            </DynamicMarker>
-                            </DynamicMapContainer>
+                            <DynamicMapContent selectedFoco={selectedFoco} open={open}/>
                             )
                     }
                 </div>
