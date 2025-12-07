@@ -66,7 +66,7 @@ export default function TableComponent() {
 useEffect(() => {
     AOS.init({ duration: 800, once: false, mirror:true });
   }, []);
-  if (loading) return <div className="p-4 bg-[#71E4C0] flex justify-center items-center">Carregando...</div>;
+  if (loading) return <div className="p-4 animate-pulse flex justify-center items-center">Carregando...</div>;
 
   return (
     <div className="w-full h-full py-4 flex justify-center items-center flex-col my-10">

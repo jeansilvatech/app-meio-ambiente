@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect } from 'react';
 import L, { Map } from 'leaflet'; 
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; 
@@ -48,7 +48,7 @@ const MapContent = ({ selectedFoco, open }:MapContentProps) => {
         <MapContainer 
             center={[selectedFoco.lat, selectedFoco.lon]} 
             zoom={6}
-            style={{ height: '500px', width: '100%' }}
+            style={{ height: '90%', width: '100%' }}
         >
             {/* MapResizer e todo o resto do mapa */}
             <MapResizer open={open} />

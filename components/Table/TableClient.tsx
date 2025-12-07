@@ -17,7 +17,7 @@ interface MapContentProps {
 }
 const DynamicMapContent = dynamic<MapContentProps>(() => import('../Map/MapContent'), {
     ssr: false, 
-    loading: () => <p>Carregando mapa...</p>,
+    loading: () => <div className='text-white text-center animate-pulse flex flex-col justify-center items-center w-full h-full'><Image src={iconFireUrl} alt="Loading icon" width={32} height={32} /><span>Carregando mapa...</span></div>,
 });
 type SortDirection = 'asc' | 'desc';
 const style = {
@@ -28,6 +28,7 @@ const style = {
   width: '90%',
   height: '90%',
   bgcolor: '#60c29f',
+  borderRadius: '8px',
   boxShadow: 24,
   p: 4,
 };
@@ -109,23 +110,23 @@ export default function TableClient({ queimadas }: { queimadas: FocoQueimada[] }
                     className="w-1/2 p-2 border border-black/30 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-[#71E4C0]"
                 />
             </div>
-            <table className="lg:w-11/12 w-full lg:text-md text-xs  text-black border border-black shadow-2xl">
+            <table className="lg:w-11/12 w-full lg:text-md text-xs  text-black shadow-2xl">
                 <thead className='bg-[#71E4C0]'>
                     <tr className="p-4 w-full">
                         <th
-                            className="p-4 cursor-pointer hover:bg-[#60c29f] border-r"
+                            className="p-4 cursor-pointer hover:bg-[#60c29f] border"
                             onClick={() => handleSort('municipio')}
                         >
                             Município {getSortIcon('municipio', sortKey, sortDirection)}
                         </th>
                         <th
-                            className="p-4 cursor-pointer hover:bg-[#60c29f] border-r"
+                            className="p-4 cursor-pointer hover:bg-[#60c29f] border"
                             onClick={() => handleSort('estado')}
                         >
                             Estado {getSortIcon('estado', sortKey, sortDirection)}
                         </th>
                         <th
-                            className="p-4 cursor-pointer hover:bg-[#60c29f] border-r"
+                            className="p-4 cursor-pointer hover:bg-[#60c29f] border"
                             onClick={() => handleSort('bioma')}
                         >
                             Bioma {getSortIcon('bioma', sortKey, sortDirection)}
