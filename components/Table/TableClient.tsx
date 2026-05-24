@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import React from 'react';
 
-// @ts-expect-error - O TypeScript não encontra as declarações de tipo para a importação direta do CSS, mas o bundler processa corretamente.
 import 'leaflet/dist/leaflet.css';
 
 import iconFireUrl from '../../public/fire-icon.png';
