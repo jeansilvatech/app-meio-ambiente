@@ -86,7 +86,7 @@ export default function TableComponent({ queimadas, loading }: TableProps) {
           </h2>
           
           <div className="w-full flex justify-center items-center lg:gap-8 gap-4 flex-col lg:flex-row bg-slate-950/30 border border-slate-900 rounded-3xl p-6 lg:p-10 backdrop-blur-sm">
-            <div className="shrink-0 bg-slate-900/20 p-4 rounded-2xl border border-slate-800/50">
+            <div className="shrink-0 bg-slate-900/20 p-4 rounded-2xl ">
               <Image unoptimized data-aos="fade-right" className="opacity-80 brightness-90 grayscale hover:grayscale-0 transition-all duration-500" src={iconBrasil} alt="Mapa do Brasil" width={260} height={260} />
             </div>
             
@@ -109,7 +109,7 @@ export default function TableComponent({ queimadas, loading }: TableProps) {
           </h2>
           
           <div className="w-full flex justify-center items-center lg:gap-8 gap-4 flex-col lg:flex-row-reverse bg-slate-950/30 border border-slate-900 rounded-3xl p-6 lg:p-10 backdrop-blur-sm">
-            <div className="shrink-0 bg-slate-900/20 p-4 rounded-2xl border border-slate-800/50">
+            <div className="shrink-0 bg-slate-900/20 p-4 rounded-2xl ">
               <Image unoptimized data-aos="fade-left" className="brightness-90 grayscale hover:grayscale-0" src={iconBioma} alt="Ícone Biomas" width={240} height={240} />
             </div>
             
