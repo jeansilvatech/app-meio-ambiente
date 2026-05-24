@@ -6,7 +6,7 @@ import iconBioma from '../../public/bioma.svg';
 import Image from "next/image";
 
 import AOS from 'aos';
-// @ts-expect-error - O TypeScript não encontra as declarações de tipo para a importação direta do CSS, mas o bundler processa corretamente.
+
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import Card from "../Card";
 // ..
