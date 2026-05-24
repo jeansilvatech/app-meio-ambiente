@@ -14,7 +14,7 @@ const Card = ({ local, quantidade }: CardProps) => {
                  bg-slate-900/40 backdrop-blur-md 
                  border border-slate-800/80 hover:border-orange-500/40
                  text-white flex flex-col justify-between items-center 
-                 p-4 m-2 rounded-2xl shadow-xl transition-all duration-300 group hover:-translate-y-1"
+                 p-4 m-2 rounded-2xl shadow-xl transition-all duration-300 ease-out group  hover:shadow-orange-500/3  cursor-pointer"
     >
       {/* Nome do Local */}
       <h3 className="uppercase text-center text-xs sm:text-sm font-semibold tracking-wider text-slate-400 group-hover:text-white transition-colors h-10 flex items-center justify-center text-wrap px-1">
