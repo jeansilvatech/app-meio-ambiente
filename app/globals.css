@@ -17,7 +17,12 @@
 /* Removido o "@media (prefers-color-scheme)" para que o site 
    seja consistentemente escuro em qualquer dispositivo.
 */
-
+html{
+  scroll-behavior: smooth;
+  /* Melhora a renderização de elementos pesados durante o scroll */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
 body {
   background-color: #090a0f; /* Fundo escuro oficial do painel de monitoramento */
   color: var(--foreground);

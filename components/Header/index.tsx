@@ -7,7 +7,13 @@ const Header = ({ onDownload }: HeaderProps) => {
 const handleScrollToMap = () => {
   const element = document.getElementById("Municipios");
   if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
+    // requestAnimationFrame diz ao navegador: "Rode isso no momento exato da próxima atualização de tela"
+    requestAnimationFrame(() => {
+      element.scrollIntoView({ 
+        behavior: "smooth", 
+        block: "start" // Garante que ele alinhe perfeitamente no topo da seção
+      });
+    });
   }
 };
 

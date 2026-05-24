@@ -85,8 +85,8 @@ export default function TableComponent({ queimadas, loading }: TableProps) {
             </span>
           </h2>
           
-          <div className="w-full flex justify-center items-center lg:gap-8 gap-4 flex-col lg:flex-row bg-slate-950/30 border border-slate-900 rounded-3xl p-6 lg:p-10 backdrop-blur-sm">
-            <div className="shrink-0 bg-slate-900/20 p-4 rounded-2xl ">
+          <div className="w-full flex justify-center items-center lg:items-start lg:gap-8 gap-4 flex-col lg:flex-row bg-slate-950/30 border border-slate-900 rounded-3xl p-6 lg:p-10 backdrop-blur-sm">
+            <div className="shrink-0 bg-slate-900/20 p-4 rounded-2xl flex justify-center items-center lg:sticky lg:top-4">
               <Image unoptimized data-aos="fade-right" className="opacity-80 brightness-90 grayscale hover:grayscale-0 transition-all duration-500" src={iconBrasil} alt="Mapa do Brasil" width={260} height={260} />
             </div>
             

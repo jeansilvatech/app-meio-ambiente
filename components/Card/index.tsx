@@ -9,13 +9,15 @@ const Card = ({ local, quantidade }: CardProps) => {
 
   return (
     <div
-      data-aos="fade-up"
-      className="w-[155px] h-[155px] sm:w-[180px] sm:h-[180px] lg:w-[220px] lg:h-[220px] 
-                 bg-slate-900/40 backdrop-blur-md 
-                 border border-slate-800/80 hover:border-orange-500/40
-                 text-white flex flex-col justify-between items-center 
-                 p-4 m-2 rounded-2xl shadow-xl transition-all duration-300 ease-out group  hover:shadow-orange-500/3  cursor-pointer"
-    >
+  data-aos="fade-up"
+  className="w-[155px] h-[155px] sm:w-[180px] sm:h-[180px] lg:w-[220px] lg:h-[220px] 
+             bg-slate-900/60 backdrop-blur-sm 
+             border border-slate-800/80 hover:border-orange-500/40
+             text-white flex flex-col justify-between items-center 
+             p-4 m-2 rounded-2xl shadow-xl 
+             transition-all duration-300 ease-out group 
+             hover:-translate-y-1.5 transform-gpu will-change-transform"
+>
       {/* Nome do Local */}
       <h3 className="uppercase text-center text-xs sm:text-sm font-semibold tracking-wider text-slate-400 group-hover:text-white transition-colors h-10 flex items-center justify-center text-wrap px-1">
         {local}
