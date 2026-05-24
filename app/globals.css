@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #60c29f;
+  /* Forçando o fundo escuro oficial do painel de monitoramento */
+  --background: #090a0f; 
+  --foreground: #f8fafc;
+  --primary: #f97316; /* Mudado para o Laranja das queimadas para alinhar o tema */
 }
 
 @theme inline {
@@ -13,35 +14,38 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Removido o "@media (prefers-color-scheme)" para que o site 
+   seja consistentemente escuro em qualquer dispositivo.
+*/
 
 body {
-  background: var(--background);
+  background-color: #090a0f; /* Fundo escuro oficial do painel de monitoramento */
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
+
 .MuiBox-root{
   padding: 0 !important;
 }
+
 .header{
   background-image: url('/bg1.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .popup .leaflet-popup-content-wrapper,
 .popup .leaflet-popup-tip {
   background-color: #8B0000;
   color: #ffffff;
 }
+
 .popup .leaflet-popup-close-button{
   color: #ffffff;
 }
+
 .popup .popup-separator{
   width: 80%;
   height: 1px;
@@ -49,6 +53,11 @@ body {
   background-color: #ffffff;
   margin: 8px 0;
 }
+
+/* A classe .table-line antiga usava um span absoluto que cobria a linha toda.
+   Como nós refatoramos o TableClient usando o sistema nativo de hover do Tailwind,
+   você pode manter ou apagar essas regras abaixo se não estiver usando em outro lugar.
+*/
 .table-line span{
   position: absolute;
   top: 0;

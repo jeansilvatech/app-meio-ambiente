@@ -1,7 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -50,16 +49,43 @@ const scrollToSection = (id: string) => {
     }
   };
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        <Image src={IconFire} alt="Fire Icon" width={40} height={40} />
+    <Box 
+      onClick={handleDrawerToggle} 
+      sx={{ 
+        textAlign: 'center', 
+        bgcolor: '#090a0f', 
+        height: '100%',
+        color: '#cbd5e1', 
+      }}
+    >
+      <Typography variant="h6" sx={{ my: 3, display: 'flex', justifyContent: 'center' }}>
+        <Image src={IconFire} alt="Fire Icon" width={38} height={38} className="animate-pulse" />
       </Typography>
-      <Divider />
+      <Divider sx={{ borderColor: 'rgba(255,255,255,0.06)' }} />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} onClick={() => scrollToSection(item)} />
+            <ListItemButton 
+              onClick={() => scrollToSection(item)}
+              sx={{ 
+                textAlign: 'center',
+                py: 2,
+                '&:hover': {
+                  bgcolor: 'rgba(249, 115, 22, 0.08)', 
+                  color: '#f97316', 
+                },
+                transition: 'all 0.2s ease-in-out'
+              }}
+            >
+              <ListItemText 
+                primary={item} 
+                primaryTypographyProps={{
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em'
+                }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -71,34 +97,76 @@ const scrollToSection = (id: string) => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar component="nav" sx={{backgroundColor:'#ffffff'}}>
-        <Toolbar>
+      {/* <CssBaseline /> */}
+      <AppBar 
+        component="nav" 
+        elevation={0} 
+        sx={{
+          backgroundColor: 'rgba(9, 10, 15, 0.65)', 
+          backdropFilter: 'blur(12px)', 
+          borderBottom: '1px solid rgba(255, 255, 255, 0.05)', 
+          boxShadow: 'none',
+        }}
+      >
+        <Toolbar sx={{ justifyContent: 'space-between', minHeight: { sm: '70px' } }}>
+          
+          {/* ÍCONE MENU MOBILE */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: 'none' }, color: '#f8fafc' }}
           >
-            <MenuIcon sx={{ color: '#0a0a0a' }} />
+            <MenuIcon />
           </IconButton>
+          
+          {/* LOGO (DESKTOP) */}
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ 
+              flexGrow: 1, 
+              display: { xs: 'none', sm: 'flex' },
+              alignItems: 'center',
+            }}
           >
-            <Image src={IconFire} alt="Fire Icon" width={40} height={40} />
+            <div className="hover:opacity-80 transition-opacity cursor-pointer">
+              <Image src={IconFire} alt="Fire Icon" width={35} height={35} />
+            </div>
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+
+          {/* LINKS DE NAVEGAÇÃO (DESKTOP) */}
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#0a0a0a' }} onClick={() => scrollToSection(item)}>
+              <Button 
+                key={item} 
+                onClick={() => scrollToSection(item)}
+                sx={{ 
+                  color: '#94a3b8', 
+                  fontSize: '0.8rem',
+                  fontWeight: '600',
+                  letterSpacing: '0.07em',
+                  textTransform: 'uppercase',
+                  px: 2,
+                  py: 1,
+                  borderRadius: '8px',
+                  transition: 'all 0.2s',
+                  '&:hover': {
+                    color: '#ffffff', 
+                    backgroundColor: 'rgba(255, 255, 255, 0.03)', 
+                  }
+                }}
+              >
                 {item}
               </Button>
             ))}
           </Box>
+          
         </Toolbar>
       </AppBar>
+
+      {/* MENU LATERAL MOBILE */}
       <nav>
         <Drawer
           container={container}
@@ -106,18 +174,25 @@ const scrollToSection = (id: string) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box', 
+              width: drawerWidth,
+              borderRight: '1px solid rgba(255, 255, 255, 0.05)',
+              boxShadow: '10px 0 30px rgba(0,0,0,0.5)'
+            },
           }}
         >
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
+      
+      {/* ESPAÇADOR DA TOOLBAR */}
+      <Box component="main" sx={{ p: 0 }}>
+        <Toolbar sx={{ minHeight: { sm: '70px' } }} />
       </Box>
     </Box>
   );
