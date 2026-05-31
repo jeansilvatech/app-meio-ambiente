@@ -16,7 +16,7 @@ const Card = ({ local, quantidade }: CardProps) => {
              text-white flex flex-col justify-between items-center 
              p-4 m-2 rounded-2xl shadow-xl 
              transition-all duration-300 ease-out group 
-             hover:-translate-y-1.5 transform-gpu will-change-transform"
+             hover:transform hover:transition-transform transform-gpu will-change-transform"
 >
       {/* Nome do Local */}
       <h3 className="uppercase text-center text-xs sm:text-sm font-semibold tracking-wider text-slate-400 group-hover:text-white transition-colors h-10 flex items-center justify-center text-wrap px-1">
@@ -34,7 +34,7 @@ const Card = ({ local, quantidade }: CardProps) => {
       </div>
       
       {/* Sutil detalhe inferior decorativo que acende no hover */}
-      <div className="w-8 h-0.5 bg-slate-800 group-hover:w-16 group-hover:bg-orange-500 transition-all rounded-full" />
+      <div className="w-8 h-0.5 bg-slate-800 group-hover:w-16 group-hover:bg-orange-500 transition-all duration-300 rounded-full" />
     </div>
   );
 };
